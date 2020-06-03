@@ -86,11 +86,12 @@ const data = [
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
   }
+    
 ];
 
 /* Step 1: Write a component called 'articleMaker' to create an article. You want your component to return markup like the template below: 
 
-  <div class="article">
+    <div class="article">
     <h2>{title of the article}</h2>
     <p class="date">{date of the article}</p>
 
@@ -111,3 +112,59 @@ const data = [
 
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 */
+const articles = document.querySelector('.articles')
+ 
+
+function articleMaker (obj){
+
+      const articleContainer = document.createElement ('div');
+      articleContainer.classList.add ( 'article')
+
+      const articleTitle = document.createElement('h2');
+      articleTitle.innerText= obj.title
+
+      const articleDate = document.createElement('p');
+      articleDate.classList.add("date")
+      articleDate.textContent = obj.date
+
+
+      const articleContent = document.createElement('p');
+
+      articleContent.innerText = obj.firstParagraph; obj.secondParagraph; obj.thirdParagraph;
+      
+      const buttonExpand = document.createElement('span');
+      buttonExpand.classList.add ("expandButton")
+
+      
+      articleContainer.prepend(articleTitle)
+      articleContainer.appendChild(articleDate)
+      articleContainer.appendChild(articleContent)
+      articleContainer.appendChild(buttonExpand)
+      
+         buttonExpand.textContent = "Read More"
+         
+
+
+        buttonExpand.addEventListener('click', event => {
+
+          buttonExpand.classList.toggle('toggle')
+
+           articleContainer.classList.toggle('article-open')
+           articleContent.classList.toggle('toggle-on')
+           
+
+          
+
+         
+          }
+        )
+        
+  return articleContainer
+  
+ }
+
+ 
+for (let i = 0; i < data.length; i++) {
+  const articleContainer = articleMaker(data[i])
+  articles.appendChild(articleContainer)
+}
